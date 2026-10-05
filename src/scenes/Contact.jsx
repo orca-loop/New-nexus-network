@@ -21,7 +21,7 @@ export function ContactForm() {
     try {
       if (CONTACT.formEndpoint.includes('REPLACE_ME')) { // no form service set up yet: send the enquiry straight to WhatsApp
         const t = `New enquiry%0AName: ${data.name}%0ACompany: ${data.company || '-'}%0APhone: ${data.phone}%0ACity: ${data.city || '-'}%0AService: ${data.type}%0A${data.message || ''}`;
-        window.open(`${CONTACT.whatsapp}?text=${t}`, '_blank'); setState('ok'); f.reset(); return;
+        window.location.href = `${CONTACT.whatsapp}?text=${t}`; setState('ok'); f.reset(); return;
       }
       const res = await fetch(CONTACT.formEndpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(f) });
       if (res.ok) { setState('ok'); f.reset(); } else setState('bad');
